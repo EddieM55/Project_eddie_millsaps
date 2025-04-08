@@ -14,6 +14,9 @@ public class Policy {
     private String holderLastName;
     private String providName;
 
+    /**
+     * No-argument constructor to initialize default values for a policy.
+     */
     public Policy() {
         this.policyNum = 0;
         this.holderAge = 0;
@@ -29,6 +32,18 @@ public class Policy {
         this.providName = "";
     }
 
+    /**
+     * Constructor to initialize a policy with provided details.
+     * 
+     * @param policyNum The policy number.
+     * @param providName The name of the insurance provider.
+     * @param holderFirstName The first name of the policyholder.
+     * @param holderLastName The last name of the policyholder.
+     * @param holderAge The age of the policyholder.
+     * @param holderSmoking The smoking status of the policyholder (1 for smoker, 2 for non-smoker).
+     * @param holderHeight The height of the policyholder in inches.
+     * @param holderWeight The weight of the policyholder in pounds.
+     */
     public Policy(int policyNum, String providName, String holderFirstName, String holderLastName, int holderAge, int holderSmoking, int holderHeight, double holderWeight) {
         this.policyNum = policyNum;
         this.providName = providName;
@@ -44,88 +59,188 @@ public class Policy {
         this.finalPolicyPrice = this.policyPrice + this.addedFees;
     }
 
+    /**
+     * Gets the policy number.
+     * 
+     * @return The policy number.
+     */
     public int getPolicyNum() {
         return policyNum;
     }
 
+    /**
+     * Sets the policy number.
+     * 
+     * @param policyNum The policy number to set.
+     */
     public void setPolicyNum(int policyNum) {
         this.policyNum = policyNum;
     }
 
+    /**
+     * Gets the age of the policyholder.
+     * 
+     * @return The policyholder's age.
+     */
     public int getHolderAge() {
         return holderAge;
     }
 
+    /**
+     * Sets the age of the policyholder and updates the final policy price.
+     * 
+     * @param holderAge The age of the policyholder to set.
+     */
     public void setHolderAge(int holderAge) {
         this.holderAge = holderAge;
         updateFinalPolicyPrice();
     }
 
+    /**
+     * Gets the smoking status of the policyholder.
+     * 
+     * @return The smoking status of the policyholder (1 for smoker, 2 for non-smoker).
+     */
     public int getHolderSmoking() {
         return holderSmoking;
     }
 
+    /**
+     * Sets the smoking status of the policyholder and updates the final policy price.
+     * 
+     * @param holderSmoking The smoking status of the policyholder to set.
+     */
     public void setHolderSmoking(int holderSmoking) {
         this.holderSmoking = holderSmoking;
         updateFinalPolicyPrice();
     }
 
+    /**
+     * Gets the weight of the policyholder.
+     * 
+     * @return The weight of the policyholder.
+     */
     public double getHolderWeight() {
         return holderWeight;
     }
 
+    /**
+     * Sets the weight of the policyholder and updates the BMI and final policy price.
+     * 
+     * @param holderWeight The weight of the policyholder to set.
+     */
     public void setHolderWeight(double holderWeight) {
         this.holderWeight = holderWeight;
         this.holderBMI = (holderWeight * 703) / (holderHeight * holderHeight);
         updateFinalPolicyPrice();
     }
 
+    /**
+     * Gets the height of the policyholder.
+     * 
+     * @return The height of the policyholder.
+     */
     public int getHolderHeight() {
         return holderHeight;
     }
 
+    /**
+     * Sets the height of the policyholder and updates the BMI and final policy price.
+     * 
+     * @param holderHeight The height of the policyholder to set.
+     */
     public void setHolderHeight(int holderHeight) {
         this.holderHeight = holderHeight;
         this.holderBMI = (holderWeight * 703) / (holderHeight * holderHeight);
         updateFinalPolicyPrice();
     }
 
+    /**
+     * Gets the BMI (Body Mass Index) of the policyholder.
+     * 
+     * @return The BMI of the policyholder.
+     */
     public double getHolderBMI() {
         return holderBMI;
     }
 
+    /**
+     * Gets the base policy price.
+     * 
+     * @return The base price of the policy.
+     */
     public double getPolicyPrice() {
         return policyPrice;
     }
 
+    /**
+     * Gets the final policy price after adding any calculated fees.
+     * 
+     * @return The final policy price.
+     */
     public double getFinalPolicyPrice() {
         return finalPolicyPrice;
     }
 
+    /**
+     * Gets the first name of the policyholder.
+     * 
+     * @return The first name of the policyholder.
+     */
     public String getHolderFirstName() {
         return holderFirstName;
     }
 
+    /**
+     * Sets the first name of the policyholder.
+     * 
+     * @param holderFirstName The first name of the policyholder to set.
+     */
     public void setHolderFirstName(String holderFirstName) {
         this.holderFirstName = holderFirstName;
     }
 
+    /**
+     * Gets the last name of the policyholder.
+     * 
+     * @return The last name of the policyholder.
+     */
     public String getHolderLastName() {
         return holderLastName;
     }
 
+    /**
+     * Sets the last name of the policyholder.
+     * 
+     * @param holderLastName The last name of the policyholder to set.
+     */
     public void setHolderLastName(String holderLastName) {
         this.holderLastName = holderLastName;
     }
 
+    /**
+     * Gets the name of the insurance provider.
+     * 
+     * @return The name of the insurance provider.
+     */
     public String getProvidName() {
         return providName;
     }
 
+    /**
+     * Sets the name of the insurance provider.
+     * 
+     * @param providName The name of the insurance provider to set.
+     */
     public void setProvidName(String providName) {
         this.providName = providName;
     }
 
+    /**
+     * Calculates the added fees based on the policyholder's age, smoking status, and BMI.
+     * 
+     * @return The added fees based on the policyholder's details.
+     */
     private double calculateAddedFees() {
         double fees = 0.0;
         if (holderAge > 50) {
@@ -140,11 +255,19 @@ public class Policy {
         return fees;
     }
 
+    /**
+     * Updates the final policy price by recalculating the added fees.
+     */
     private void updateFinalPolicyPrice() {
         this.addedFees = calculateAddedFees();
         this.finalPolicyPrice = this.policyPrice + this.addedFees;
     }
 
+    /**
+     * Main method to collect policyholder information, calculate pricing, and display results.
+     * 
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
 
@@ -156,9 +279,11 @@ public class Policy {
         while (true) {
             Policy policy = new Policy();
 
+            System.out.println("\nEnter details for a new policy (or type 'exit' to stop):");
+
             System.out.println("Please enter the Policy Number: ");
             policy.setPolicyNum(keyboard.nextInt());
-            keyboard.nextLine(); 
+            keyboard.nextLine();  // consume the newline
 
             System.out.println("Please enter the Insurance provider's name: ");
             policy.setProvidName(keyboard.nextLine());
