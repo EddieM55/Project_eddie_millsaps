@@ -1,8 +1,5 @@
 import java.util.Scanner;
 
-/**
- * Represents an insurance policy with details such as policy number, policyholder's personal information, and policy pricing.
- */
 public class Policy {
     private int policyNum;
     private int holderAge;
@@ -18,7 +15,7 @@ public class Policy {
     private String providName;
 
     /**
-     * No-argument constructor for the Policy class. Initializes default values for the fields.
+     * No-argument constructor to initialize default values for a policy.
      */
     public Policy() {
         this.policyNum = 0;
@@ -36,14 +33,14 @@ public class Policy {
     }
 
     /**
-     * Constructor for creating a Policy object with specified values.
+     * Constructor to initialize a policy with provided details.
      * 
-     * @param policyNum The unique identifier for the policy.
+     * @param policyNum The policy number.
      * @param providName The name of the insurance provider.
      * @param holderFirstName The first name of the policyholder.
      * @param holderLastName The last name of the policyholder.
      * @param holderAge The age of the policyholder.
-     * @param holderSmoking The smoking status of the policyholder (1 for smoker, 0 for non-smoker).
+     * @param holderSmoking The smoking status of the policyholder (1 for smoker, 2 for non-smoker).
      * @param holderHeight The height of the policyholder in inches.
      * @param holderWeight The weight of the policyholder in pounds.
      */
@@ -61,8 +58,6 @@ public class Policy {
         this.addedFees = calculateAddedFees();
         this.finalPolicyPrice = this.policyPrice + this.addedFees;
     }
-
-    // Getters and setters
 
     /**
      * Gets the policy number.
@@ -92,7 +87,7 @@ public class Policy {
     }
 
     /**
-     * Sets the age of the policyholder.
+     * Sets the age of the policyholder and updates the final policy price.
      * 
      * @param holderAge The age of the policyholder to set.
      */
@@ -104,16 +99,16 @@ public class Policy {
     /**
      * Gets the smoking status of the policyholder.
      * 
-     * @return 1 if the policyholder is a smoker, 0 if non-smoker.
+     * @return The smoking status of the policyholder (1 for smoker, 2 for non-smoker).
      */
     public int getHolderSmoking() {
         return holderSmoking;
     }
 
     /**
-     * Sets the smoking status of the policyholder.
+     * Sets the smoking status of the policyholder and updates the final policy price.
      * 
-     * @param holderSmoking The smoking status to set (1 for smoker, 0 for non-smoker).
+     * @param holderSmoking The smoking status of the policyholder to set.
      */
     public void setHolderSmoking(int holderSmoking) {
         this.holderSmoking = holderSmoking;
@@ -121,7 +116,7 @@ public class Policy {
     }
 
     /**
-     * Gets the weight of the policyholder in pounds.
+     * Gets the weight of the policyholder.
      * 
      * @return The weight of the policyholder.
      */
@@ -130,7 +125,7 @@ public class Policy {
     }
 
     /**
-     * Sets the weight of the policyholder in pounds.
+     * Sets the weight of the policyholder and updates the BMI and final policy price.
      * 
      * @param holderWeight The weight of the policyholder to set.
      */
@@ -141,7 +136,7 @@ public class Policy {
     }
 
     /**
-     * Gets the height of the policyholder in inches.
+     * Gets the height of the policyholder.
      * 
      * @return The height of the policyholder.
      */
@@ -150,7 +145,7 @@ public class Policy {
     }
 
     /**
-     * Sets the height of the policyholder in inches.
+     * Sets the height of the policyholder and updates the BMI and final policy price.
      * 
      * @param holderHeight The height of the policyholder to set.
      */
@@ -179,7 +174,7 @@ public class Policy {
     }
 
     /**
-     * Gets the final policy price after all calculations and added fees.
+     * Gets the final policy price after adding any calculated fees.
      * 
      * @return The final policy price.
      */
@@ -242,9 +237,9 @@ public class Policy {
     }
 
     /**
-     * Calculates any added fees based on the policyholder's details (age, smoking, BMI).
+     * Calculates the added fees based on the policyholder's age, smoking status, and BMI.
      * 
-     * @return The calculated added fees.
+     * @return The added fees based on the policyholder's details.
      */
     private double calculateAddedFees() {
         double fees = 0.0;
@@ -261,7 +256,7 @@ public class Policy {
     }
 
     /**
-     * Updates the final policy price by recalculating the added fees and combining them with the base policy price.
+     * Updates the final policy price by recalculating the added fees.
      */
     private void updateFinalPolicyPrice() {
         this.addedFees = calculateAddedFees();
@@ -269,54 +264,80 @@ public class Policy {
     }
 
     /**
-     * Main method that runs the program to collect user input and display policy information.
+     * Main method to collect policyholder information, calculate pricing, and display results.
      * 
-     * @param args Command-line arguments (not used).
+     * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
 
-        // Create a Policy object using the no-argument constructor
-        Policy policy = new Policy();
+        // Track how many smokers and non-smokers
+        int smokerCount = 0;
+        int nonSmokerCount = 0;
 
-        // Display prompts and read user input
-        System.out.println("Please enter the Policy Number: ");
-        policy.setPolicyNum(keyboard.nextInt());
-        keyboard.nextLine();
+        // Continuously ask the user to enter policies
+        while (true) {
+            Policy policy = new Policy();
 
-        System.out.println("Please enter the Insurance provider's name: ");
-        policy.setProvidName(keyboard.nextLine());
+            System.out.println("\nEnter details for a new policy (or type 'exit' to stop):");
 
-        System.out.print("Please enter the Policyholder's First Name: ");
-        policy.setHolderFirstName(keyboard.nextLine());
+            System.out.println("Please enter the Policy Number: ");
+            policy.setPolicyNum(keyboard.nextInt());
+            keyboard.nextLine();  // consume the newline
 
-        System.out.print("Please enter the Policyholder's Last Name: ");
-        policy.setHolderLastName(keyboard.nextLine());
+            System.out.println("Please enter the Insurance provider's name: ");
+            policy.setProvidName(keyboard.nextLine());
 
-        System.out.println("Please enter the Policyholder’s Age: ");
-        policy.setHolderAge(keyboard.nextInt());
+            System.out.print("Please enter the Policyholder's First Name: ");
+            policy.setHolderFirstName(keyboard.nextLine());
 
-        System.out.println("Please enter the Policyholder's Smoking Status: ");
-        System.out.println("\t1. Smoker");
-        System.out.println("\t2. Non-Smoker");
-        policy.setHolderSmoking(keyboard.nextInt());
+            System.out.print("Please enter the Policyholder's Last Name: ");
+            policy.setHolderLastName(keyboard.nextLine());
 
-        System.out.println("Please enter the Policyholder’s Height (in inches): ");
-        policy.setHolderHeight(keyboard.nextInt());
+            System.out.println("Please enter the Policyholder’s Age: ");
+            policy.setHolderAge(keyboard.nextInt());
 
-        System.out.println("Please enter the Policyholder’s Weight (in pounds): ");
-        policy.setHolderWeight(keyboard.nextDouble());
+            System.out.println("Please enter the Policyholder's Smoking Status: ");
+            System.out.println("\t1. Smoker");
+            System.out.println("\t2. Non-Smoker");
+            int smokingStatus = keyboard.nextInt();
+            policy.setHolderSmoking(smokingStatus);
 
-        // Output the collected information
-        System.out.println("Policy Number: " + policy.getPolicyNum());
-        System.out.println("Provider Name: " + policy.getProvidName());
-        System.out.println("Policyholder's First Name: " + policy.getHolderFirstName());
-        System.out.println("Policyholder's Last Name: " + policy.getHolderLastName());
-        System.out.println("Policyholder's Age: " + policy.getHolderAge());
-        System.out.println("Policyholder's Smoking Status: " + (policy.getHolderSmoking() == 1 ? "Smoker" : "Non-Smoker"));
-        System.out.println("Policyholder's Height: " + policy.getHolderHeight());
-        System.out.println("Policyholder's Weight: " + policy.getHolderWeight());
-        System.out.println("Policyholder's BMI: " + policy.getHolderBMI());
-        System.out.println("Policy Price: $" + policy.getFinalPolicyPrice());
+            System.out.println("Please enter the Policyholder’s Height (in inches): ");
+            policy.setHolderHeight(keyboard.nextInt());
+
+            System.out.println("Please enter the Policyholder’s Weight (in pounds): ");
+            policy.setHolderWeight(keyboard.nextDouble());
+
+            // Count smokers and non-smokers
+            if (policy.getHolderSmoking() == 1) {
+                smokerCount++;
+            } else {
+                nonSmokerCount++;
+            }
+
+            // Display the policy details
+            System.out.println("\nPolicy Number: " + policy.getPolicyNum());
+            System.out.println("Provider Name: " + policy.getProvidName());
+            System.out.println("Policyholder's First Name: " + policy.getHolderFirstName());
+            System.out.println("Policyholder's Last Name: " + policy.getHolderLastName());
+            System.out.println("Policyholder's Age: " + policy.getHolderAge());
+            System.out.println("Policyholder's Smoking Status: " + (policy.getHolderSmoking() == 1 ? "Smoker" : "Non-Smoker"));
+            System.out.println("Policyholder's Height: " + policy.getHolderHeight());
+            System.out.println("Policyholder's Weight: " + policy.getHolderWeight());
+            System.out.println("Policyholder's BMI: " + policy.getHolderBMI());
+            System.out.println("Policy Price: $" + policy.getFinalPolicyPrice());
+
+            // Ask the user if they want to continue
+            System.out.println("\nWould you like to enter another policy? (yes/no)");
+            String continueInput = keyboard.next();
+            if (continueInput.equalsIgnoreCase("no")) {
+                break;
+            }
+        }
+
+        // Output the number of smokers and non-smokers
+        System.out.println("\nTotal number of smokers: " + smokerCount);
+        System.out.println("Total number of non-smokers: " + nonSmokerCount);
     }
 }
