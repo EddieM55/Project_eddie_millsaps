@@ -3,6 +3,7 @@ public class Policy
    private String policyNumber;
    private String providerName;
    private PolicyHolder policyHolder;
+   private static int policyCount = 0;
 
    /**
    No-arg constructor that explicitly initializes all fields
@@ -12,6 +13,7 @@ public class Policy
       policyNumber = "";
       providerName = "";
       policyHolder = new PolicyHolder();
+      policyCount++;
    }
    
    /**
@@ -25,6 +27,7 @@ public class Policy
       policyNumber = pNumber;
       providerName = pName;
       policyHolder = pHolder;
+      policyCount++;
    }
    
    //getters//
@@ -50,6 +53,14 @@ public class Policy
    public PolicyHolder policyHolder()
    {
       return policyHolder;
+   }
+   
+   /**
+   @return The Policy Count
+   */
+   public static int getPolicyCount()
+   {
+      return policyCount;
    }
    
    //setters//
@@ -113,7 +124,8 @@ public class Policy
       return "Policy Number: " + policyNumber + "\n" +
              "Provider Name: " + providerName + "\n" +
              policyHolder.toString() +
-             String.format("Policy Price: $%.2f\n", getPrice());
+             String.format("Policy Price: $%.2f\n", getPrice()) +
+             "There were " + policyCount + " Policy objects created.\n";
    }
    
 }
